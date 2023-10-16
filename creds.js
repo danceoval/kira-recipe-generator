@@ -1,1 +1,0 @@
-export const OPEN_AI_KEY = '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'; 
