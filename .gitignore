@@ -2,7 +2,7 @@ node_modules/
 dist/
 .cache/
 
-secrets.*
+./secrets.js
 
 # Logs
 logs
