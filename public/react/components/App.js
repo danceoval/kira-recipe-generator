@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios'; // You'll need to install axios
 
-import {OPEN_AI_KEY} from '../../../creds';
+import {OPEN_AI_KEY} from '../../../secrets';
 
 
 export const App = () => {
@@ -63,48 +63,50 @@ export const App = () => {
   };
 
   return (
-    <div>
+    <div className="container">
       <h1>Snack Recipe Recommendations</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>
-            Add Ingredient:
-            <input type="text" value={inputValue} onChange={handleInputChange} />
-          </label>
-          <button type="button" onClick={handleAddIngredient}>
-            Add Ingredient
-          </button>
-        </div>
-        {ingredients.length > 0 && (
+      <div className="form-container">
+        <form onSubmit={handleSubmit}>
           <div>
-            <h2>Ingredients List:</h2>
-            <ul>
-              {ingredients.map((ingredient, index) => (
-                <li key={index}>
-                  {ingredient}
-                  <button type="button" onClick={() => handleRemoveIngredient(index)}>
-                    Remove Ingredient
-                  </button>
-                </li>
-              ))}
-            </ul>
+            <label>
+              Add Ingredient:
+              <input type="text" value={inputValue} onChange={handleInputChange} />
+            </label>
+            <button type="button" onClick={handleAddIngredient}>
+              Add Ingredient
+            </button>
+          </div>
+          {ingredients.length > 0 && (
+            <div className="ingredients-list">
+              <h2>Ingredients List:</h2>
+              <ul>
+                {ingredients.map((ingredient, index) => (
+                  <li key={index}>
+                    {ingredient}
+                    <button type="button" onClick={() => handleRemoveIngredient(index)}>
+                      Remove
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {!isLoading && ingredients.length > 0 && (
+            <button type="submit">
+              Get Recipe
+            </button>
+          )}
+        </form>
+        </div>
+        {
+          isLoading ? 'Generating Recipe' : ''
+        }
+        {recipe && !isLoading && (
+          <div className="recipe-container">
+            <h2>Recommended Snack Recipe:</h2>
+            <p>{recipe}</p>
           </div>
         )}
-        {!isLoading && ingredients.length > 0 && (
-          <button type="submit">
-            Get Recipe
-          </button>
-        )}
-      </form>
-      {isLoading && (
-        <p>Loading recipe...</p>
-      )}
-      {recipe && !isLoading && (
-        <div>
-          <h2>Recommended Snack Recipe:</h2>
-          <p>{recipe}</p>
-        </div>
-      )}
     </div>
   );
 };
