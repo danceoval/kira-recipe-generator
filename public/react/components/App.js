@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios'; // You'll need to install axios
 
-import {OPEN_AI_KEY} from '../../../secrets';
+import {OPEN_AI_KEY} from '../../../creds';
 
 
 export const App = () => {
