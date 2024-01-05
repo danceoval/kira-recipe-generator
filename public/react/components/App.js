@@ -28,7 +28,7 @@ export const App = () => {
           </div>
         </form>
         </div>
-        {recipe && !isLoading && (
+        {recipe && (
           <div className="recipe-container">
             <h2>Recommended Snack Recipe:</h2>
             <p>{recipe}</p>
